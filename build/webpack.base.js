@@ -2,6 +2,8 @@ const dev = require("./webpack.dev");
 const prod = require("./webpack.prod");
 const path = require("path");
 const merge = require("webpack-merge"); // 用于合并base，dev或者base，prd的配置文件
+const HtmlWebpackPlugin = require("html-webpack-plugin"); // 用于打包后自动生成index.html,自动引入bundle.js
+const { CleanWebpackPlugin } = require("clean-webpack-plugin") // 默认导出的是对象，所以解构时候要加{}
 module.exports = env => {
   // env 是环境变量用于区分 通过--config指向的是谁
   console.log(env)
@@ -11,7 +13,18 @@ module.exports = env => {
     output: {
       filename: "bundle.js",
       path: path.resolve(__dirname, "../dist")
-    }
+    },
+    plugins: [
+      new CleanWebpackPlugin(), // 用于每次打包前清空dist文件夹
+      new HtmlWebpackPlugin({
+        template: path.resolve(__dirname, "../public/index.html"), // 根index.html
+        filename: "index.html",
+        minify: !isDev && { // 生产环境需要压缩，去掉双引号
+          removeAttributeQuotes: true, // 去掉双引号
+          collapseWhitespace: true // 压缩
+        }
+      })
+    ].filter(Boolean)
   }
   // 函数要返回配置文件，没返回会采用默认配置
   if (isDev) {
