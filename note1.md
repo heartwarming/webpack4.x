@@ -1,4 +1,4 @@
-#初始化项目
+# 初始化项目
 
 npm init y
 // 安装webpack webpack-cli(4版本之前没有, 作用是解析用户传递的参数，把解析好的参数传递给webpack进行打包, webpack不要全局安装，就在自己项目下安装)
