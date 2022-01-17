@@ -9,6 +9,8 @@ const glob = require("glob"); // 主要功能就是查找匹配的文件
 // 主要的作用删除无意义的css，只能配合 mini-css-extract-plugin
 const PurgeCssWebpackPlugin = require("purgecss-webpack-plugin");
 const AddCdnPlguin = require("add-asset-html-cdn-webpack-plugin"); // 通过cdn动态加载插件，避免都打包进bundle.js体积过大
+const DLLReferencePlugin = require("webpack").DllReferencePlugin;
+const AddAssetHtmlPlugin = require("add-asset-html-webpack-plugin");
 module.exports = env => {
   // env 是环境变量用于区分 通过--config指向的是谁
   console.log(env)
@@ -23,6 +25,10 @@ module.exports = env => {
       // 解析的css的时候 就不能渲染dom
       // css 可以并行和js 一同加载 mini-css-extract-plugin
       rules: [
+        {
+          test: /\.json$/,
+          loader: 'json-loader'
+        },
         {
           test: /\.vue$/,
           use: 'vue-loader'
@@ -104,7 +110,14 @@ module.exports = env => {
       // 添加cdn的插件
       new AddCdnPlguin(true, {
         'jquery': 'https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js'
-      })
+      }),
+      // dll失败了，暂时没找到原因
+      // new DLLReferencePlugin({
+      //   manifest: path.resolve(__dirname, "dll/manifest.json")
+      // }),
+      // new AddAssetHtmlPlugin({
+      //   filepath: path.resolve(__dirname, "./dll/react.dll.js")
+      // })
     ].filter(Boolean)
   }
   // 函数要返回配置文件，没返回会采用默认配置

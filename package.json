@@ -7,7 +7,8 @@
     "dev": "webpack-dev-server --env.development --config ./build/webpack.base",
     "dev:build": "webpack --env.development --config ./build/webpack.base.js",
     "build": "webpack --env.production --config ./build/webpack.base",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dll": "webpack --config webpack.dll.js"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,7 @@
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
     "add-asset-html-cdn-webpack-plugin": "^1.0.0",
+    "add-asset-html-webpack-plugin": "^3.1.3",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
@@ -43,6 +45,7 @@
     "glob": "^7.1.4",
     "html-webpack-plugin": "^3.2.0",
     "jquery": "^3.4.1",
+    "json-loader": "^0.5.7",
     "mini-css-extract-plugin": "^0.8.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^3.0.0",
