@@ -4,6 +4,7 @@ const path = require("path");
 const merge = require("webpack-merge"); // 用于合并base，dev或者base，prd的配置文件
 const HtmlWebpackPlugin = require("html-webpack-plugin"); // 用于打包后自动生成index.html,自动引入bundle.js
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 生产环境需要抽离css(不能都放在style标签里)，但是开发环境不需要抽离
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 module.exports = env => {
   // env 是环境变量用于区分 通过--config指向的是谁
   console.log(env)
@@ -18,6 +19,10 @@ module.exports = env => {
       // 解析的css的时候 就不能渲染dom
       // css 可以并行和js 一同加载 mini-css-extract-plugin
       rules: [
+        {
+          test: /\.vue$/,
+          use: 'vue-loader'
+        },
         { // 解析js文件 默认会调用@babel/core 
           test: /\.js$/,
           use: 'babel-loader'
@@ -70,6 +75,7 @@ module.exports = env => {
       !isDev && new MiniCssExtractPlugin({ // 如果是开发模式就不要使用抽离样式的插件
         filename: 'css/main.css' //抽离后的文件名字
       }),
+      new VueLoaderPlugin(),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, "../public/index.html"), // 根index.html
         filename: "index.html",
