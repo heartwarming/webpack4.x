@@ -4,6 +4,7 @@ const path = require("path");
 const merge = require("webpack-merge"); // 用于合并base，dev或者base，prd的配置文件
 const HtmlWebpackPlugin = require("html-webpack-plugin"); // 用于打包后自动生成index.html,自动引入bundle.js
 const { CleanWebpackPlugin } = require("clean-webpack-plugin") // 默认导出的是对象，所以解构时候要加{}
+const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 生产环境需要抽离css(不能都放在style标签里)，但是开发环境不需要抽离
 module.exports = env => {
   // env 是环境变量用于区分 通过--config指向的是谁
   console.log(env)
@@ -20,14 +21,19 @@ module.exports = env => {
       rules: [
         {
           test: /\.css$/,
-          use: ['style-loader', {
-            loader: "css-loader",
-            options: {
-              // 给loader传递参数
-              // 如果css文件引入其他文件@import
-              importLoaders: 2
-            }
-          },"postcss-loader", "sass-loader"]
+          use: [ // 是不是开发环境 如果是就用style-loader
+            isDev ? "style-loader" : MiniCssExtractPlugin.loader,
+            {
+              loader: "css-loader",
+              options: {
+                // 给loader传递参数
+                // 如果css文件引入其他文件@import
+                importLoaders: 2
+              }
+            },
+            "postcss-loader",
+            "sass-loader"
+          ]
         },
         {
           // 匹配到scss结尾的使用sass-loader 来调用node-sass处理sass文件
@@ -41,6 +47,10 @@ module.exports = env => {
       path: path.resolve(__dirname, "../dist")
     },
     plugins: [
+      // 在每次打包之前 先清除dist目录下的文件
+      !isDev && new MiniCssExtractPlugin({ // 如果是开发模式就不要使用抽离样式的插件
+        filename: 'css/main.css' //抽离后的文件名字
+      }),
       new CleanWebpackPlugin(), // 用于每次打包前清空dist文件夹
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, "../public/index.html"), // 根index.html
