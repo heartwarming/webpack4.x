@@ -18,6 +18,10 @@ module.exports = env => {
       // 解析的css的时候 就不能渲染dom
       // css 可以并行和js 一同加载 mini-css-extract-plugin
       rules: [
+        { // 解析js文件 默认会调用@babel/core 
+          test: /\.js$/,
+          use: 'babel-loader'
+        },
         {
           test: /\.css$/,
           use: [ // 是不是开发环境 如果是就用style-loader
