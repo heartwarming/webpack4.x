@@ -8,12 +8,13 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const glob = require("glob"); // 主要功能就是查找匹配的文件
 // 主要的作用删除无意义的css，只能配合 mini-css-extract-plugin
 const PurgeCssWebpackPlugin = require("purgecss-webpack-plugin");
+const AddCdnPlguin = require("add-asset-html-cdn-webpack-plugin"); // 通过cdn动态加载插件，避免都打包进bundle.js体积过大
 module.exports = env => {
   // env 是环境变量用于区分 通过--config指向的是谁
   console.log(env)
   let isDev = env.development;
   const base = {
-    entry: path.resolve(__dirname, "../src/index.tsx"),
+    entry: path.resolve(__dirname, "../src/index.js"),
     module: {
       // 转化什么文件 用什么去转，使用哪些loader
       // loader 写法 [] / {} ''
@@ -77,6 +78,9 @@ module.exports = env => {
       filename: "bundle.js",
       path: path.resolve(__dirname, "../dist")
     },
+    // externals:{
+    //     'jquery':'$' // 不去打包代码中的jquery,但是最好是通过插件管理 AddCdnPlguin
+    // },
     plugins: [
       // 在每次打包之前 先清除dist目录下的文件
       !isDev && new MiniCssExtractPlugin({ // 如果是开发模式就不要使用抽离样式的插件
@@ -93,6 +97,10 @@ module.exports = env => {
           removeAttributeQuotes: true, // 去掉双引号
           collapseWhitespace: true // 压缩
         }
+      }),
+      // 添加cdn的插件
+      new AddCdnPlguin(true, {
+        'jquery': 'https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js'
       })
     ].filter(Boolean)
   }

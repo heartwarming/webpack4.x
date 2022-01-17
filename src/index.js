@@ -1,7 +1,8 @@
 import './index.css';
 import './a.scss';
 import logo from './logo.jpg';
-
+import $ from 'jquery'; // 这个文件应该是cdn加载进来的
+console.log($); 
 let a = require('./a-module');
 console.log(a);
 
