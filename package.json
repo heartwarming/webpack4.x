@@ -16,7 +16,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "sideEffects": false,
+  "sideEffects": [
+    "**/*.css"
+  ],
   "bugs": {
     "url": "https://github.com/heartwarming/webpack4.x/issues"
   },
