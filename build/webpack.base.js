@@ -5,6 +5,9 @@ const merge = require("webpack-merge"); // 用于合并base，dev或者base，pr
 const HtmlWebpackPlugin = require("html-webpack-plugin"); // 用于打包后自动生成index.html,自动引入bundle.js
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 生产环境需要抽离css(不能都放在style标签里)，但是开发环境不需要抽离
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const glob = require("glob"); // 主要功能就是查找匹配的文件
+// 主要的作用删除无意义的css，只能配合 mini-css-extract-plugin
+const PurgeCssWebpackPlugin = require("purgecss-webpack-plugin");
 module.exports = env => {
   // env 是环境变量用于区分 通过--config指向的是谁
   console.log(env)
@@ -80,6 +83,9 @@ module.exports = env => {
         filename: 'css/main.css' //抽离后的文件名字
       }),
       new VueLoaderPlugin(),
+      new PurgeCssWebpackPlugin({
+        paths: glob.sync("./src/**/*", { nodir: true })
+      }),
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, "../public/index.html"), // 根index.html
         filename: "index.html",

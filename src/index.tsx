@@ -1,15 +1,15 @@
-// import './index.css';
-// import './a.scss';
-// import logo from './logo.jpg';
+import './index.css';
+import './a.scss';
+import logo from './logo.jpg';
 
-// let a = require('./a-module');
-// console.log(a);
+let a = require('./a-module');
+console.log(a);
 
-// let img = document.createElement('img')
+let img = document.createElement('img')
 
-// img.src = logo
+img.src = logo
 
-// document.body.appendChild(img)
+document.body.appendChild(img)
 
 // const fn = ()=> {
 
