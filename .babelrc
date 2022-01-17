@@ -1,6 +1,14 @@
 {
 	"presets": [
-		"@babel/preset-env" // 插件包，里面有很多插件
+		[
+			"@babel/preset-env", // 插件包，里面有很多插件
+			{
+				// 使用的api 会自动转化，并且是按需加载
+				"useBuiltIns": "usage",
+				// babel-polyfill()
+				"corejs": 2
+			}
+		] 
 	],
 	"plugins": [ // 放单个插件
 		// 解析类的属性 class A { a=1 }
@@ -17,6 +25,7 @@
 			{
 				"loose": true
 			}
-		]
+		],
+		"@babel/plugin-transform-runtime"
 	]
 }

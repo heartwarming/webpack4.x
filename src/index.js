@@ -24,3 +24,6 @@ class A{
 function log(target){
   console.log(target)
 }
+
+[1,2,3].includes(1);
+
