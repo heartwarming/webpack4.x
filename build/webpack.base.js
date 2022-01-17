@@ -10,6 +10,20 @@ module.exports = env => {
   let isDev = env.development;
   const base = {
     entry: path.resolve(__dirname, "../src/index.js"),
+    module: {
+      // 转化什么文件 用什么去转，使用哪些loader
+      // loader 写法 [] / {} ''
+      // 打包css 还需要处理一下 样式前缀
+
+      // 解析的css的时候 就不能渲染dom
+      // css 可以并行和js 一同加载 mini-css-extract-plugin
+      rules: [
+        {
+          test: /\.css$/,
+          use: [ "style-loader", "css-loader"]
+        }
+      ]
+    },
     output: {
       filename: "bundle.js",
       path: path.resolve(__dirname, "../dist")
