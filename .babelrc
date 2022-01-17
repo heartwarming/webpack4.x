@@ -10,7 +10,12 @@
 			}
 		],
 		"@babel/preset-react",
-		"@babel/preset-typescript"
+		[
+			"@babel/preset-typescript",
+			{
+				"allExtensions": true
+			}
+		]
 	],
 	"plugins": [ // 放单个插件
 		// 解析类的属性 class A { a=1 }
