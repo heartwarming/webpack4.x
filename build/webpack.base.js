@@ -74,6 +74,9 @@ module.exports = env => {
         }
       ]
     },
+    // optimization:{
+    //     usedExports:true // 使用了哪个模块你和我说一下,只有提示作用
+    // },
     output: {
       filename: "bundle.js",
       path: path.resolve(__dirname, "../dist")

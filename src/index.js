@@ -62,3 +62,13 @@ let vm = new Vue({
   el: "#root",
   render: h => h(App)
 });
+
+
+// tree-shaking 默认只支持 es6语法的 d 静态导入
+// 只在生产环境下使用
+import {minus} from './calc';
+// // 如果引入的变量没有使用就删除
+import test from './test';// 副作用的代码 可能开发时 是无意义的
+
+// import  './style.css'; // 如果引入css 文件需要增加他不是副作用 否则会被tree-shaking掉
+console.log(minus(2,1))

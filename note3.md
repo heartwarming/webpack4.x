@@ -18,4 +18,6 @@ babel7
 默认会调用 @babel/core会转化代码，转化的时候需要用 @babel/presets-env 转化成es5
 @babel/core @babel/preset-env  babel-loader
 
-// 解析react + vue
+# 解析react + vue
+
+# webpack优化
