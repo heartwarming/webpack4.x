@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --env.production --config ./build/webpack.base",
     "dev": "webpack-dev-server --env.development --config ./build/webpack.base",
+    "dev:build": "webpack --env.development --config ./build/webpack.base.js",
+    "build": "webpack --env.production --config ./build/webpack.base",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,9 +21,13 @@
   },
   "homepage": "https://github.com/heartwarming/webpack4.x#readme",
   "devDependencies": {
+    "autoprefixer": "^9.6.1",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "postcss-loader": "^3.0.0",
+    "sass": "^1.48.0",
+    "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
     "webpack": "^4.40.2",
     "webpack-cli": "^3.3.9",

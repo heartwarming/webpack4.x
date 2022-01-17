@@ -20,7 +20,19 @@ module.exports = env => {
       rules: [
         {
           test: /\.css$/,
-          use: [ "style-loader", "css-loader"]
+          use: ['style-loader', {
+            loader: "css-loader",
+            options: {
+              // 给loader传递参数
+              // 如果css文件引入其他文件@import
+              importLoaders: 2
+            }
+          },"postcss-loader", "sass-loader"]
+        },
+        {
+          // 匹配到scss结尾的使用sass-loader 来调用node-sass处理sass文件
+          test: /\.scss$/,
+          use: ["style-loader", "css-loader", "sass-loader"]
         }
       ]
     },
