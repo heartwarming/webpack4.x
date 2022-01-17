@@ -1,8 +1,14 @@
 {
     "presets": [
-       "@babel/preset-env"
+       "@babel/preset-env" // 插件包，里面有很多插件
     ],
-    "plugins": [
-        
+    "plugins": [ // 放单个插件
+        // 解析类的属性 class A { a=1 }
+        [
+            "@babel/plugin-proposal-class-properties",
+            {
+                "loose": true
+            }
+        ]
     ]
 }

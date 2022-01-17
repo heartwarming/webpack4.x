@@ -15,3 +15,7 @@ const fn = ()=> {
 
 }
 fn()
+
+class A {
+  a = 1
+}
