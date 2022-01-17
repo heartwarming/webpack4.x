@@ -10,7 +10,7 @@ module.exports = env => {
   console.log(env)
   let isDev = env.development;
   const base = {
-    entry: path.resolve(__dirname, "../src/index.js"),
+    entry: path.resolve(__dirname, "../src/index.tsx"),
     module: {
       // 转化什么文件 用什么去转，使用哪些loader
       // loader 写法 [] / {} ''
@@ -22,6 +22,10 @@ module.exports = env => {
         {
           test: /\.vue$/,
           use: 'vue-loader'
+        },
+        {
+          test: /\.tsx?$/,
+          use: 'babel-loader'
         },
         { // 解析js文件 默认会调用@babel/core 
           test: /\.js$/,
