@@ -1,6 +1,6 @@
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin") // 默认导出的是对象，所以解构时候要加{}
 module.exports = {
 	mode: 'production',
 	optimization: { // 优化项
@@ -10,6 +10,6 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new CleanWebpackPlugin(),
+		new CleanWebpackPlugin(), // 用于每次打包前清空dist文件夹
 	]
 }
