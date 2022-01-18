@@ -85,6 +85,7 @@ module.exports = env => {
     // },
     output: {
       filename: "bundle.js",
+      chunkFilename: "[name].min.js",
       path: path.resolve(__dirname, "../dist")
     },
     // externals:{
