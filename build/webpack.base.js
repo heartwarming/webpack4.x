@@ -11,6 +11,9 @@ const PurgeCssWebpackPlugin = require("purgecss-webpack-plugin");
 const AddCdnPlguin = require("add-asset-html-cdn-webpack-plugin"); // 通过cdn动态加载插件，避免都打包进bundle.js体积过大
 const DLLReferencePlugin = require("webpack").DllReferencePlugin;
 const AddAssetHtmlPlugin = require("add-asset-html-webpack-plugin");
+const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin'); // 计算模块打包时间
+// 写个循环
+const smw = new SpeedMeasureWebpackPlugin();
 module.exports = env => {
   // env 是环境变量用于区分 通过--config指向的是谁
   console.log(env)

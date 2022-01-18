@@ -1,6 +1,6 @@
 // import './index.css';
 // import './a.scss';
-// import logo from './logo.jpg';
+// // import logo from './logo.jpg';
 // import $ from 'jquery'; // 这个文件应该是cdn加载进来的
 // console.log($);
 // let a = require('./a-module');
@@ -56,12 +56,12 @@
 // babel7 @babel/preset-typescript
 
 
-// import Vue from 'vue';
-// import App from './App.vue'
-// let vm = new Vue({
-//   el: "#root",
-//   render: h => h(App)
-// });
+import Vue from 'vue';
+import App from './App.vue'
+let vm = new Vue({
+  el: "#root",
+  render: h => h(App)
+});
 
 
 // tree-shaking 默认只支持 es6语法的 d 静态导入
@@ -74,18 +74,18 @@
 // console.log(minus(2,1))
 
 // 动态加载文件
-import {add} from './calc';
-let button = document.createElement('button');
+// import {add} from './calc';
+// let button = document.createElement('button');
 
-button.addEventListener('click',()=>{
-    // 动态导入 类比 路由的懒加载 import语法
-    // 会使用jsonp动态加载calc的文件
-    // import 可以实现代码分割
-    // 原理就是jsonp动态导入
-    import(/* webpackChunkName:'video' */'./calc').then(data=>{
-        console.log(data.add(1,2));
-    })
-})
-button.innerHTML = '点我'
+// button.addEventListener('click',()=>{
+//     // 动态导入 类比 路由的懒加载 import语法
+//     // 会使用jsonp动态加载calc的文件
+//     // import 可以实现代码分割
+//     // 原理就是jsonp动态导入
+//     import(/* webpackChunkName:'video' */'./calc').then(data=>{
+//         console.log(data.add(1,2));
+//     })
+// })
+// button.innerHTML = '点我'
 
-document.body.appendChild(button);
+// document.body.appendChild(button);
